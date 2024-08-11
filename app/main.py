@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+import os, uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 
 from . import models
@@ -10,6 +11,10 @@ from .config import settings
 # models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
 
 origins = ["*"]
 
